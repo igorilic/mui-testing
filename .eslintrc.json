@@ -1,17 +1,19 @@
 {
-  "extends": ["plugin:@nrwl/nx/react"],
-  "root": true,
+  "extends": ["plugin:@nrwl/nx/react", "./.eslintrc.base.json"],
   "ignorePatterns": ["!**/*"],
-  "plugins": ["@nrwl/nx"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {}
+      "rules": {
+        "@nrwl/nx/enforce-module-boundaries": [
+          "error",
+          // This is the part you need to add
+          { "allowCircularSelfDependency": true }
+        ]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
       "rules": {}
     }
   ]
